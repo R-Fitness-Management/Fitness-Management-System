@@ -5,9 +5,6 @@ private String name;
 private String email;
 private String role;
 private boolean active;
-
-
-
 public User(String name, String email, String role, boolean active) {
 this.name = name;
 this.email= email;
