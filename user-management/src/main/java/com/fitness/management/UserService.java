@@ -3,6 +3,7 @@ package com.fitness.management;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class UserService {
 	private Map<String, User> users = new HashMap<>();
 	
@@ -38,5 +39,6 @@ public boolean detectiveUser (String email) {
 	public User getUser(String email) {
 		return users.get(email);
 	}
+
 	
 }
