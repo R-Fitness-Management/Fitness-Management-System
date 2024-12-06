@@ -5,16 +5,21 @@ import com.fitness.management.UserService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.Assert.*;
 
 
 public class UserManagementSteps {
 	private UserService userService;
+	private Map<String, Boolean> activityData;
 	
-	
-	@Given("the admin dash board  is loaded")
+	@Given("the admin dashboard  is loaded")
 	public void the_admin_dash_board_is_loaded() {
 		userService  = new UserService();
+		activityData = new HashMap<>();
 	}
 
 	@When("the admin adds a new user with name {string}, email {string} ,role {string}, and status {string}")
@@ -36,4 +41,33 @@ public class UserManagementSteps {
 	    assertNotNull("User should exist in the system", user);
 	}
 
+	@When("a new instructor registration with email {string} is pending approval")
+    public void a_new_instructor_registration_with_email_is_pending_approval(String email) {
+        User user = new User("New Instructor", email, "Instructor", false);
+        boolean added = userService.addUser(user);
+        assertTrue("Instructor registration should be added for approval", added);
+    }
+
+    @When("the admin approves the registration")
+    public void the_admin_approves_the_registration() {
+        boolean approved = userService.approveUser("instructor@example.com");
+        assertTrue("Instructor should be approved", approved);
+    }
+
+    @Then("the instructor should be marked as approved")
+    public void the_instructor_should_be_marked_as_approved() {
+        User user = userService.getUser("instructor@example.com");
+        assertTrue("User should be active", user.isActive());
+    }
+
+    @When("the admin requests user activity statistics")
+    public void the_admin_requests_user_activity_statistics() {
+        activityData = userService.getUserActivityStats();
+    }
+
+    @Then("the system should display user activity and engagement data")
+    public void the_system_should_display_user_activity_and_engagement_data() {
+        assertNotNull("Activity data should not be null", activityData);
+        assertTrue("Activity data should contain engagement stats", activityData.size() > 0);
+    }
 }

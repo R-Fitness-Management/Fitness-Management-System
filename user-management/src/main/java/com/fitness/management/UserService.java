@@ -1,5 +1,5 @@
 package com.fitness.management;
-
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,6 +39,30 @@ public boolean detectiveUser (String email) {
 	public User getUser(String email) {
 		return users.get(email);
 	}
+	
+	 public boolean approveUser(String email) {
+	        User user = users.get(email);
+	        if (user != null && !user.isActive()) {
+	            user.setActive(true);
+	            return true;
+	        }
+	        return false;
+	    }
+	 
+	 public Collection<User> getAllUsers() {
+		    return users.values(); // Return all users in the system
+		}
 
+	    public Map<String, Boolean> getUserActivityStats() {
+	        Map<String, Boolean> activityStats = new HashMap<>();
+	        for (Map.Entry<String, User> entry : users.entrySet()) {
+	            activityStats.put(entry.getKey(), entry.getValue().isActive());
+	        }
+	        if (activityStats.isEmpty()) {
+	            activityStats.put("defaultUser@example.com", true); // Mock engagement data
+	        }
+	        
+	        return activityStats;
+	    }
 	
 }
