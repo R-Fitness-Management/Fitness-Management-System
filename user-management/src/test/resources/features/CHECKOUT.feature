@@ -1,4 +1,3 @@
-
 Feature: Admin User Management 
 
 Scenario: Add a new user 

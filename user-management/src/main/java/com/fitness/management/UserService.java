@@ -50,7 +50,7 @@ public boolean detectiveUser (String email) {
 	    }
 	 
 	 public Collection<User> getAllUsers() {
-		    return users.values(); // Return all users in the system
+		    return users.values(); 
 		}
 
 	    public Map<String, Boolean> getUserActivityStats() {
@@ -59,10 +59,14 @@ public boolean detectiveUser (String email) {
 	            activityStats.put(entry.getKey(), entry.getValue().isActive());
 	        }
 	        if (activityStats.isEmpty()) {
-	            activityStats.put("defaultUser@example.com", true); // Mock engagement data
+	            activityStats.put("defaultUser@example.com", true); 
 	        }
 	        
 	        return activityStats;
+	    }
+
+	    public void setUsers(Map<String, User> users) {
+	        this.users = users;
 	    }
 	
 }
