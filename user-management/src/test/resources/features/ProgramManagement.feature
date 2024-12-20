@@ -17,13 +17,13 @@ Feature: Program Management
   Scenario: Update an existing fitness program
     Given the instructor dashboard is loaded
     When the instructor updates the program titled "Yoga Basics" with:
-      | duration    | 6 weeks                            |
-      | difficulty  | Intermediate                       |
-      | goals       | Enhanced flexibility               |
-      | price       | 150                                |
-      | schedule    | Hybrid                             |
-      | videos      | intro.mp4, session1.mp4, session2.mp4, advanced.mp4 |
-      | documents   | guide.pdf, faq.pdf, tips.pdf       |
+      | duration   | 6 weeks                     |
+      | difficulty | Intermediate                |
+      | goals      | Enhanced flexibility        |
+      | price      | 150                         |
+      | schedule   | Hybrid                      |
+      | videos     | intro.mp4, session1.mp4, session2.mp4, advanced.mp4 |
+      | documents  | guide.pdf, faq.pdf, tips.pdf |
     Then the fitness program should be updated successfully
 
   Scenario: Delete a fitness program

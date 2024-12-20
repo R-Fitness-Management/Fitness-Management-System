@@ -1,6 +1,9 @@
 package com.fitness.management;
+
+
+
 public class User {
- 
+
 private String name;
 private String email;
 private String role;
@@ -35,4 +38,6 @@ public boolean isActive() {
 public void setActive(boolean active) {
 	this.active = active;
 }
+
+
 }

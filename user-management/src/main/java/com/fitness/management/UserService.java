@@ -8,13 +8,16 @@ public class UserService {
 	private Map<String, User> users = new HashMap<>();
 	
 	public boolean addUser(User user) {
-		if (users.containsKey(user.getEmail())){
-			return false;
-		}
-		users.put(user.getEmail(),user);
-		return true;
+	    if (users.containsKey(user.getEmail())) {
+	        System.out.println("User with this email already exists.");
+	        return false;
+	    }
+	    users.put(user.getEmail(), user);
+	    return true;
 	}
 
+
+	
 public boolean updateUser(String email, String name, String role) {	
 User user = users.get(email);
 if(user == null) {
@@ -68,5 +71,22 @@ public boolean detectiveUser (String email) {
 	    public void setUsers(Map<String, User> users) {
 	        this.users = users;
 	    }
+
+	    public boolean removeUserByName(String name) {
+	        String keyToRemove = null;
+	        for (Map.Entry<String, User> entry : users.entrySet()) {
+	            if (entry.getValue().getName().equalsIgnoreCase(name)) {
+	                keyToRemove = entry.getKey();
+	                break;
+	            }
+	        }
+	        if (keyToRemove != null) {
+	            users.remove(keyToRemove);
+	            return true;
+	        }
+	        return false; 
+	    }
+	    
+
 	
-}
+} 

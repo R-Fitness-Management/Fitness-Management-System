@@ -1,5 +1,9 @@
 package com.fitness.management;
 
+
+import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,16 +13,16 @@ public class ProgramService {
 
     public boolean addProgram(Program program) {
         if (programs.containsKey(program.getTitle())) {
-            return false;
+            return false; // Program already exists
         }
         programs.put(program.getTitle(), program);
         return true;
     }
 
     public boolean updateProgram(String title, String duration, String difficulty, String goals, double price, String schedule, List<String> videos, List<String> documents) {
-        Program program = programs.get(title);
+        Program program = programs.get(title.trim());
         if (program == null) {
-            return false;
+            return false; 
         }
         program.setDuration(duration);
         program.setDifficulty(difficulty);
@@ -31,10 +35,65 @@ public class ProgramService {
     }
 
     public boolean deleteProgram(String title) {
-        return programs.remove(title) != null;
+        return programs.remove(title.trim()) != null;
     }
 
     public Program getProgram(String title) {
-        return programs.get(title);
+        return programs.get(title.trim());
+    }
+
+    public List<Program> getAllPrograms() {
+        return new ArrayList<>(programs.values()); // Use the declared 'programs' map
+    }
+    
+    public List<Program> getMostPopularPrograms() {
+        return programs.values() // Get the values from the map
+                       .stream() // Stream the collection of programs
+                       .sorted(Comparator.comparingInt(Program::getEnrollment).reversed()) // Sort by enrollment descending
+                       .collect(Collectors.toList()); // Collect to a list
+    }
+
+
+
+    public Map<String, Double> generateRevenueReport() {
+        Map<String, Double> revenueReport = new HashMap<>();
+        for (Program program : programs.values()) {
+            double revenue = program.getPrice() * program.getEnrollment();
+            revenueReport.put(program.getTitle(), revenue);
+        }
+        return revenueReport;
+    }
+
+    public Map<String, Integer> generateAttendanceReport() {
+        Map<String, Integer> attendanceReport = new HashMap<>();
+        for (Program program : programs.values()) {
+            attendanceReport.put(program.getTitle(), program.getEnrollment());
+        }
+        return attendanceReport;
+    }
+
+    public Map<String, String> generateClientProgressReport() {
+        Map<String, String> progressReport = new HashMap<>();
+        for (Program program : programs.values()) {
+            progressReport.put(program.getTitle(), program.getProgressSummary());
+        }
+        return progressReport;
+    }
+
+    public Map<String, List<Program>> getActiveAndCompletedPrograms() {
+        Map<String, List<Program>> categorizedPrograms = new HashMap<>();
+        categorizedPrograms.put("Active", new ArrayList<>());
+        categorizedPrograms.put("Completed", new ArrayList<>());
+
+        for (Program program : programs.values()) {
+            if (program.isActive()) {
+                categorizedPrograms.get("Active").add(program);
+            } else {
+                categorizedPrograms.get("Completed").add(program);
+            }
+        }
+
+        return categorizedPrograms;
     }
 }
+

@@ -1,8 +1,10 @@
 package com.fitness.management;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Program {
+public class Program implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String title;
     private String duration;
     private String difficulty;
@@ -11,6 +13,9 @@ public class Program {
     private String schedule;
     private List<String> videos;
     private List<String> documents;
+    private int enrollment; 
+    private String progressSummary;
+    private boolean isActive; 
 
     public Program(String title, String duration, String difficulty, String goals, double price, String schedule, List<String> videos, List<String> documents) {
         this.title = title;
@@ -23,7 +28,6 @@ public class Program {
         this.documents = documents;
     }
 
-    // Getters and Setters
     public String getTitle() {
         return title;
     }
@@ -72,6 +76,14 @@ public class Program {
         this.schedule = schedule;
     }
 
+    public List<String> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(List<String> videos) {
+        this.videos = videos;
+    }
+
     public List<String> getDocuments() {
         return documents;
     }
@@ -79,12 +91,42 @@ public class Program {
     public void setDocuments(List<String> documents) {
         this.documents = documents;
     }
+    @Override
+    public String toString() {
+        return "Program{" +
+                "title='" + title + '\'' +
+                ", duration='" + duration + '\'' +
+                ", difficulty='" + difficulty + '\'' +
+                ", goals='" + goals + '\'' +
+                ", price=" + price +
+                ", schedule='" + schedule + '\'' +
+                ", videos=" + videos +
+                ", documents=" + documents +
+                '}';
+    }
     
-    public List<String> getvideos() {
-        return videos;
+    public int getEnrollment() {
+        return enrollment;
     }
 
-    public void setVideos(List<String> videos) {
-        this.videos = videos;
+    public void setEnrollment(int enrollment) {
+        this.enrollment = enrollment;
     }
+
+    public String getProgressSummary() {
+        return progressSummary;
+    }
+
+    public void setProgressSummary(String progressSummary) {
+        this.progressSummary = progressSummary;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
 }

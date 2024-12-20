@@ -1,2 +1,4 @@
-yassen,yassen@gmail.com,client,Inactive
+ahmad,ahmad@gmail.com,instructor,Active
+toto,toto@gmail.com,client,Active
+arnab,arnab@gmail.com,client,Active
 rand,rand@gmail.com,instructor,Active
