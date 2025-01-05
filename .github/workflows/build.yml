@@ -42,6 +42,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          cd user-management  # Navigate to the directory containing pom.xml
+          cd C:\Users\pc\git\Fitness-Management-System\user-management\pom.xml
           mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
             -Dsonar.projectKey=R-Fitness-Management_Fitness-Management-System
